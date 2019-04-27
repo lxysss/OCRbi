@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:id="@+id/test_page_2"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/test_commnet_2"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="用户词汇量精确测试,共20个字"/>
+
+    <TextView
+        android:id="@+id/test_word_2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:textSize="70sp"
+        android:layout_marginBottom="80dp"
+        android:gravity="center"
+        android:textColor="#000"
+        android:background="@drawable/word"
+        android:layout_gravity="center"/>
+
+    <LinearLayout
+        android:id="@+id/test_word_no_2"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="150dp"
+        android:background="@drawable/payment_button_shape_3"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="不认识"
+            android:textSize="21sp"
+            android:textColor="#FF4081"
+            android:layout_gravity="center"
+            />
+        <ImageView
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/close_no"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/test_word_yes_2"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/payment_button_shape_3"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="认识"
+            android:textSize="22sp"
+            android:textColor="#1296db"
+            android:layout_gravity="center"
+            />
+        <ImageView
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="40dp"
+            android:src="@drawable/check_yes"
+            />
+    </LinearLayout>
+
+</FrameLayout>

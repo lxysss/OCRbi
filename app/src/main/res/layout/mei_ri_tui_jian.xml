@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:id="@+id/mei_ri_tui_jian"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="每日精选十本好书"
+        android:textColor="#c61a1a"
+        android:layout_marginLeft="20dp"
+        android:textSize="15sp"/>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="25dp"
+        android:id="@+id/daily_recommend_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
+</FrameLayout>

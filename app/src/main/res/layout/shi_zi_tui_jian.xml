@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:id="@+id/shi_zi_shu_tui_jian"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/rank_text_tz"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="根据您的识字数为您推荐如下书籍"
+        android:textColor="#c61a1a"
+        android:layout_marginLeft="20dp"
+        android:textSize="15sp"/>
+
+   <LinearLayout
+       android:layout_marginTop="20dp"
+       android:layout_width="match_parent"
+       android:layout_height="40dp"
+       android:orientation="horizontal">
+
+     <Button
+         android:id="@+id/rank_1"
+         android:layout_width="30dp"
+         android:layout_height="30dp"
+         android:text="A"
+         android:textSize="15sp"
+         android:layout_marginLeft="20dp"
+         android:background="@drawable/btn_shape_3"
+         android:layout_gravity="center"/>
+       <Button
+           android:id="@+id/rank_2"
+           android:layout_width="30dp"
+           android:layout_height="30dp"
+           android:text="B"
+           android:textSize="15sp"
+           android:layout_marginLeft="10dp"
+           android:background="@drawable/btn_shape_3"
+           android:layout_gravity="center"/>
+
+       <Button
+           android:id="@+id/rank_3"
+           android:layout_width="30dp"
+           android:layout_height="30dp"
+           android:layout_gravity="center"
+           android:layout_marginLeft="10dp"
+           android:background="@drawable/btn_shape_3"
+           android:text="C"
+           android:textSize="15sp" />
+       <Button
+           android:id="@+id/rank_4"
+           android:layout_width="30dp"
+           android:text="D"
+           android:textSize="15sp"
+           android:layout_marginLeft="10dp"
+           android:background="@drawable/btn_shape_3"
+           android:layout_height="30dp"
+           android:layout_gravity="center"/>
+       <Button
+           android:id="@+id/rank_5"
+           android:layout_width="30dp"
+           android:layout_height="30dp"
+           android:text="E"
+           android:textSize="15sp"
+           android:background="@drawable/btn_shape_3"
+           android:layout_marginLeft="10dp"
+           android:layout_gravity="center"/>
+       <Button
+           android:id="@+id/rank_6"
+           android:layout_width="30dp"
+           android:layout_height="30dp"
+           android:text="F"
+           android:textSize="15sp"
+           android:background="@drawable/btn_shape_3"
+           android:layout_marginLeft="10dp"
+           android:layout_gravity="center"/>
+
+   </LinearLayout>
+   <TextView
+       android:layout_marginTop="60dp"
+       android:layout_width="match_parent"
+       android:layout_height="5dp"
+       android:background="@drawable/ic_gray_background"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="70dp"
+        android:id="@+id/recommend_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
+
+</FrameLayout>

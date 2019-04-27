@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.lxysss.ocrbi.activity.UserInfoActivity">
+    <include layout="@layout/user_edit_toolbar"/>
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1px"
+        android:background="@color/colorBgGrey" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:background="#fff"
+    android:orientation="vertical">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_marginTop="15dp"
+        android:id="@+id/profile_image_1"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:src="@drawable/add_pic"
+        android:layout_gravity="center"
+        app:civ_border_color="#5e74e1"
+        app:civ_border_width="2dp"/>
+</LinearLayout>
+
+    <LinearLayout
+        android:background="#fff"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="用户名"
+                android:textSize="12sp"
+                android:textColor="@color/colorBgGrey"/>
+
+            <EditText
+                android:id="@+id/et_username"
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:textColor="#fb1d1010"
+                android:hint="2-8个汉字/2-16个字符"
+                android:textColorHint="@color/colorGray"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1px"
+            android:background="@color/colorBgGrey"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="性别"
+                android:textSize="12sp"
+                android:textColor="@color/colorBgGrey"/>
+
+            <EditText
+                android:id="@+id/edit_sex"
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="请输入性别"
+                android:textColor="#fb1d1010"
+                android:textColorHint="@color/colorGray"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1px"
+            android:background="@color/colorBgGrey"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"/>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1px"
+            android:background="@color/colorBgGrey"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="@color/colorBgGrey"
+                android:text="联系方式"/>
+
+            <EditText
+                android:id="@+id/et_tel"
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="请输入手机号"
+                android:textColor="#fb1d1010"
+                android:textColorHint="@color/colorGray"
+                android:textSize="12sp" />
+        </LinearLayout>
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1px"
+            android:background="@color/colorBgGrey"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="@color/colorBgGrey"
+                android:text="年龄"/>
+
+            <EditText
+                android:id="@+id/edit_age"
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:textColor="#fb1d1010"
+                android:hint="请输入年龄"
+                android:textColorHint="@color/colorGray"
+                android:textSize="12sp" />
+        </LinearLayout>
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1px"
+            android:background="@color/colorBgGrey"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="@color/colorBgGrey"
+                android:text="邮件"/>
+
+            <EditText
+                android:id="@+id/et_eamil"
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="请输入邮箱号"
+                android:textColor="#fb1d1010"
+                android:textColorHint="@color/colorGray"
+                android:textSize="12sp" />
+        </LinearLayout>
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1px"
+            android:background="@color/colorBgGrey"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"/>
+        <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+    </LinearLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="20dp">
+        <Button
+            android:id="@+id/edit_user"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button_bg"
+            android:gravity="center"
+            android:text="编辑资料"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"/>
+
+        <Button
+            android:id="@+id/btn_update_ok"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button_bg"
+            android:gravity="center"
+            android:text="确认修改"
+            android:visibility="gone"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"/>
+    </FrameLayout>
+</LinearLayout>

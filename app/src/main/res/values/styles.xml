@@ -1,0 +1,39 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="@style/Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!--自定义Dialog-->
+    <style name="pop_anim_style">
+        <item name="android:windowEnterAnimation">@anim/pop_in</item>
+        <item name="android:windowExitAnimation">@anim/pop_out</item>
+    </style>
+    <style name="Theme_dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <!--自定义Dialog背景全透明无边框theme-->
+        <style name="MyDialog" parent="android:style/Theme.Dialog">
+             <!--背景颜色和透明程度-->
+             <item name="android:windowBackground">@android:color/transparent</item>
+             <!--是否去除标题-->
+             <item name="android:windowNoTitle">true</item>
+             <!--是否去除边框-->
+           <!--是否浮现在activity之上-->
+             <item name="android:windowIsFloating">true</item>
+            <!--是否模糊-->
+             <item name="android:backgroundDimEnabled">true</item>
+
+         </style>
+
+    <style name="TabLayoutTextStyle">
+        <item name="android:textSize">@dimen/textsizi</item>
+    </style>
+
+</resources>

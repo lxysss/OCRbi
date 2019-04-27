@@ -1,0 +1,68 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.example.lxysss.ocrbi"
+        minSdkVersion 17
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+//添加本地仓库
+repositories{
+    flatDir{
+        dirs 'libs'
+    }
+}
+
+configurations.all {
+    resolutionStrategy.force 'com.android.support:support-annotations:27.1.1'
+}
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //noinspection GradleCompatible
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation project(':openCVLibrary330')
+    compile 'com.android.support:design:26.1.0'
+    //Tablayout
+    compile 'com.android.support:recyclerview-v7:26.1.0'
+    //recyclerview
+    compile 'com.facebook.fresco:fresco:1.5.0'
+    //IGImageView
+    compile 'de.hdodenhof:circleimageview:2.1.0'
+    //Circle
+    compile 'com.yalantis:ucrop:1.4.1'
+    // Okhttp库
+    compile 'com.squareup.okhttp3:okhttp:3.1.2'
+    // Retrofit库
+    compile 'com.squareup.retrofit2:retrofit:2.0.2'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    //Zxing扫码
+    compile('com.journeyapps:zxing-android-embedded:3.6.0') { transitive = false }
+    compile 'com.google.zxing:core:3.3.0'
+    //TTS
+    implementation files('libs/Msc.jar')
+    implementation files('libs/Sunflower.jar')
+    //gif
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.1'
+    implementation files('libs/commons-httpclient-3.1.jar')
+}

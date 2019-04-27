@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@android:color/white</color>
+    <color name="colorPrimaryDark">@android:color/darker_gray</color>
+    <color name="colorAccent">#FF4081</color>
+
+        <color name="colorPrimaryBlack">#3e3a39</color>
+        <color name="colorGray">#b5b5b6</color>
+        <color name="colorBlankGray">#c9caca</color>
+        <color name="colorLightGray">#dcdddd</color>
+        <color name="colorTextGrey">#5a5657</color>
+        <color name="colorBgGrey">#595957</color>
+        <color name="colorSliderBgGrey">#1a1b1d</color>
+        <color name="home_tab_background">#000000</color>
+        <color name="button_color">#e16d10</color>
+        <color name="colorBlue">@android:color/holo_blue_light</color>
+
+</resources>

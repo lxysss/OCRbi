@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/btn_round_light_shape"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:orientation="horizontal">
+
+            <com.example.lxysss.ocrbi.activityTool.IGImageView
+                android:id="@+id/book_manage_img"
+                android:layout_width="80dp"
+                android:layout_marginLeft="20dp"
+                android:layout_gravity="center"
+                android:layout_height="90dp" />
+
+        <View
+            android:layout_width="1px"
+            android:layout_marginLeft="10dp"
+            android:layout_height="100dp"
+            android:background="#000">
+        </View>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:layout_marginTop="10dp"
+                android:id="@+id/book_manage_name"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_gravity="top"
+                android:layout_marginLeft="10dp"
+                android:text="第一行代码"
+                android:textColor="#173360"
+
+                android:textSize="14sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                />
+            <TextView
+                android:id="@+id/book_manage_author"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_gravity="top"
+                android:text="作者：大魏"
+                android:layout_marginLeft="10dp"
+                android:textColor="#173360"
+
+                android:textSize="14sp"/>
+
+            <ImageView
+                android:id="@+id/delete_book"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/icon_delete"
+                android:layout_gravity="right"
+                android:layout_marginRight="20dp"
+                />
+
+    </LinearLayout>
+</LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@drawable/ic_gray_background"/>
+</LinearLayout>
