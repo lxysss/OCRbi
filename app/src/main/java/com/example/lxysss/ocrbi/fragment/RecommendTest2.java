@@ -99,7 +99,7 @@ public class RecommendTest2 extends Fragment implements View.OnClickListener{
                 if(item==Length){
                     test_word_yes_2.setEnabled(false);
                     test_word_no_2.setEnabled(false);
-                    Toast.makeText(getContext(),String.valueOf(flag),Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getContext(),String.valueOf(flag),Toast.LENGTH_SHORT).show();
                     ShareUtils.putInt(getContext(),"wordtestf2",flag);
                     userword();
                    // Toast.makeText(getContext(), "恭喜！词汇量测试完成啦！", Toast.LENGTH_SHORT).show();

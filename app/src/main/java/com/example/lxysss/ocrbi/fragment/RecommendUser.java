@@ -74,12 +74,10 @@ public class RecommendUser extends Fragment implements View.OnClickListener{
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                /**
-                 *要执行的操作
-                 */
+
                 replacrFragment1(new Shizishutuijian());
             }
-        }, 500);//3秒后执行Runnable中的run方法
+        }, 200);
 
         initView(view);
         return view;

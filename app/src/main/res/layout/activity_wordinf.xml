@@ -124,7 +124,7 @@
                 android:id="@+id/word_inf_bushou"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="8dp"
                 android:textSize="18sp"
                 android:text="中"/>
         </LinearLayout>
@@ -143,6 +143,7 @@
             android:layout_height="1dp"
             android:layout_weight="1"/>
         <ImageView
+            android:id="@+id/cartoon_word"
             android:layout_width="100dp"
             android:layout_height="120dp"
             android:layout_marginRight="50dp"

@@ -127,7 +127,7 @@ private ImageView get_image;
 
         //初始化dialog
         dialog = new CustomDialog(getActivity(), 0, 0,
-                R.layout.dialog_photo, R.style.pop_anim_style, Gravity.BOTTOM, 0);
+                R.layout.dialog_photo, R.style.pop_anim_style, Gravity.BOTTOM, 0,0);
         //提示框以外点击无效
         dialog.setCancelable(false);
         //初始化dialog

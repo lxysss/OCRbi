@@ -380,6 +380,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
                                 }, 3000);
                             }else {
                                 Toast.makeText(mcontext,"没有找到汉字！",Toast.LENGTH_LONG).show();
+                                Log.e(TAG,"没有找到汉字!");
                             }
                         }
                         @Override

@@ -76,8 +76,9 @@ public class BookManageActivity extends AppCompatActivity implements View.OnClic
         switch (v.getId()) {
             case R.id.search_book_favorite_search:
                 //关闭输入法
-                InputMethodManager m=(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                m.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+                InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(BookManageActivity.this.getCurrentFocus().getWindowToken()
+                        ,InputMethodManager.HIDE_NOT_ALWAYS);
                 if(search_book_favorite.getText().toString().equals("")){
                     mListBook.clear();
                     getbook();

@@ -49,8 +49,9 @@ public class SearchBookActivity extends AppCompatActivity {
                     Toast.makeText(SearchBookActivity.this,"输入不能为空！",Toast.LENGTH_SHORT).show();
                 }else {
                     //关闭输入法
-                    InputMethodManager m=(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    m.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+                    InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputMethodManager.hideSoftInputFromWindow(SearchBookActivity.this.getCurrentFocus().getWindowToken()
+                            ,InputMethodManager.HIDE_NOT_ALWAYS);
                     mListBook.clear();
                     searchBook();
                 }

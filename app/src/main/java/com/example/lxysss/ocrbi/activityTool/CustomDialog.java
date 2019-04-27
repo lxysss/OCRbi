@@ -25,7 +25,8 @@ public class CustomDialog extends Dialog{
         setContentView(layout);
         Window window = getWindow();
         WindowManager.LayoutParams layoutParams = window.getAttributes();
-        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+       // layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+        layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
         layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
         layoutParams.gravity = gravity;
         window.setAttributes(layoutParams);
@@ -36,5 +37,18 @@ public class CustomDialog extends Dialog{
     public CustomDialog(Context context,int width,int height,int layout,int style,int gravity){
         this(context,width,height,layout,style,gravity, R.style.pop_anim_style);
     }
-
+    //定义属性
+    public CustomDialog(Context context,int width,int height,int layout,int style,int gravity,int anim,int photo){
+        super(context,style);
+        //设置属性
+        setContentView(layout);
+        Window window = getWindow();
+        WindowManager.LayoutParams layoutParams = window.getAttributes();
+        // layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+        layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        layoutParams.gravity = gravity;
+        window.setAttributes(layoutParams);
+        window.setWindowAnimations(anim);
+    }
 }

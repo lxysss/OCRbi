@@ -1,6 +1,11 @@
 package com.example.lxysss.ocrbi.activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,6 +42,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ActivityManager.getInstance().addActivity(this);  //加入活动容器
+        getpremission();
         btn_login_login=findViewById(R.id.btn_login_login);
         btn_login_login.setOnClickListener(this);
         btn_login_close=findViewById(R.id.btn_login_close);
@@ -113,4 +119,42 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
         }
     }
+
+    public void getpremission(){
+        if(ContextCompat.checkSelfPermission(LoginActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(LoginActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+        }
+    }
+
+    public void getpremission1() {
+        if (ContextCompat.checkSelfPermission(LoginActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(LoginActivity.this, new String[]{Manifest.permission.CAMERA}, 2);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode){
+            case 1:
+                if(grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    getpremission1();
+                }
+                else{
+                    Toast.makeText(LoginActivity.this,"您失去了权限1",Toast.LENGTH_LONG).show();
+                }
+                break;
+            case 2:
+                if(grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+
+                }
+                else{
+                    Toast.makeText(LoginActivity.this,"您失去了权限2",Toast.LENGTH_LONG).show();
+                }
+                break;
+            default:
+                break;
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
 }

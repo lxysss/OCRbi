@@ -25,7 +25,6 @@
         android:layout_marginBottom="80dp"
         android:gravity="center"
         android:textColor="#000"
-        android:text="甲"
         android:background="@drawable/word"
         android:layout_gravity="center"/>
 

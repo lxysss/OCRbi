@@ -20,6 +20,8 @@ import com.iflytek.cloud.SpeechUtility;
 import com.iflytek.cloud.SynthesizerListener;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Random;
 
 import pl.droidsonroids.gif.GifDrawable;
 import pl.droidsonroids.gif.GifImageView;
@@ -31,6 +33,8 @@ public class WordinfActivity extends AppCompatActivity {
    private Button btn_toolbar_delete_back;
    private String YU_YIN_KEY="5cbe704d";
    private GifImageView word_inf_gif;
+   private ImageView cartoon_word;
+    private int[] mIcons = new int[]{R.drawable.my,R.drawable.wuzei,R.drawable.wuya,R.drawable.songshu};
     //TTS
     private SpeechSynthesizer mTts;
     @Override
@@ -57,6 +61,11 @@ public class WordinfActivity extends AppCompatActivity {
         word_inf_bushou=findViewById(R.id.word_inf_bushou);
         word_inf_bushou.setText(getIntent().getStringExtra("bushou"));
         word_inf_gif=findViewById(R.id.word_inf_gif);
+
+        cartoon_word=findViewById(R.id.cartoon_word);
+        Random rand = new Random();
+        int i = rand.nextInt(4);
+        cartoon_word.setImageResource(mIcons[i]);
 
         if(getIntent().getStringExtra("gif").equals("")){
             word_inf_gif.setBackgroundResource(R.drawable.default_word);

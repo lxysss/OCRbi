@@ -113,6 +113,9 @@ public class Shizishutuijian extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.rank_1:
+                if(rank>1){
+                    Toast.makeText(getContext(),"这个等级的书籍对您来说有点简单呢！",Toast.LENGTH_SHORT).show();
+                }
                 rank_1.setBackgroundResource(R.drawable.btn_shape_4);
                 rank_2.setBackgroundResource(R.drawable.btn_shape_3);
                 rank_3.setBackgroundResource(R.drawable.btn_shape_3);
@@ -123,6 +126,11 @@ public class Shizishutuijian extends Fragment implements View.OnClickListener{
                 ranktobook(1);
                 break;
             case R.id.rank_2:
+                if(rank>2){
+                    Toast.makeText(getContext(),"这个等级的书籍对您来说有点简单呢！",Toast.LENGTH_SHORT).show();
+                }else if(rank<2){
+                    Toast.makeText(getContext(),"这个等级的书籍对您来说有点难呢！",Toast.LENGTH_SHORT).show();
+                }
                 rank_1.setBackgroundResource(R.drawable.btn_shape_3);
                 rank_2.setBackgroundResource(R.drawable.btn_shape_4);
                 rank_3.setBackgroundResource(R.drawable.btn_shape_3);
@@ -133,6 +141,11 @@ public class Shizishutuijian extends Fragment implements View.OnClickListener{
                 ranktobook(2);
                 break;
             case R.id.rank_3:
+                if(rank>3){
+                    Toast.makeText(getContext(),"这个等级的书籍对您来说有点简单呢！",Toast.LENGTH_SHORT).show();
+                }else if(rank<3){
+                    Toast.makeText(getContext(),"这个等级的书籍对您来说有点难呢！",Toast.LENGTH_SHORT).show();
+                }
                 rank_1.setBackgroundResource(R.drawable.btn_shape_3);
                 rank_2.setBackgroundResource(R.drawable.btn_shape_3);
                 rank_3.setBackgroundResource(R.drawable.btn_shape_4);
@@ -143,6 +156,11 @@ public class Shizishutuijian extends Fragment implements View.OnClickListener{
                 ranktobook(3);
                 break;
             case R.id.rank_4:
+                if(rank>4){
+                    Toast.makeText(getContext(),"这个等级的书籍对您来说有点简单呢！",Toast.LENGTH_SHORT).show();
+                }else if(rank<4){
+                    Toast.makeText(getContext(),"这个等级的书籍对您来说有点难呢！",Toast.LENGTH_SHORT).show();
+                }
                 rank_1.setBackgroundResource(R.drawable.btn_shape_3);
                 rank_2.setBackgroundResource(R.drawable.btn_shape_3);
                 rank_3.setBackgroundResource(R.drawable.btn_shape_3);
@@ -153,6 +171,11 @@ public class Shizishutuijian extends Fragment implements View.OnClickListener{
                 ranktobook(4);
                 break;
             case R.id.rank_5:
+                if(rank>5){
+                    Toast.makeText(getContext(),"这个等级的书籍对您来说有点简单呢！",Toast.LENGTH_SHORT).show();
+                }else if(rank<5){
+                    Toast.makeText(getContext(),"这个等级的书籍对您来说有点难呢！",Toast.LENGTH_SHORT).show();
+                }
                 rank_1.setBackgroundResource(R.drawable.btn_shape_3);
                 rank_2.setBackgroundResource(R.drawable.btn_shape_3);
                 rank_3.setBackgroundResource(R.drawable.btn_shape_3);
@@ -163,6 +186,9 @@ public class Shizishutuijian extends Fragment implements View.OnClickListener{
                 ranktobook(5);
                 break;
             case R.id.rank_6:
+               if(rank<6){
+                    Toast.makeText(getContext(),"这个等级的书籍对您来说有点难呢！",Toast.LENGTH_SHORT).show();
+                }
                 rank_1.setBackgroundResource(R.drawable.btn_shape_3);
                 rank_2.setBackgroundResource(R.drawable.btn_shape_3);
                 rank_3.setBackgroundResource(R.drawable.btn_shape_3);
