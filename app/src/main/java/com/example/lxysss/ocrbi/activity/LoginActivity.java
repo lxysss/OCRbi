@@ -56,7 +56,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_login_login:
-
+                if(edit_login_name.getText().toString().equals("") || edit_login_password.getText().toString().equals("")){
+                    Toast.makeText(LoginActivity.this, "输入不可为空！", Toast.LENGTH_SHORT).show();
+                }else {
                 ApiService mapi= RestrofitTool.getmApi();
                 RequestBody requestBody1= RequestBody.create(MediaType.parse("multipart/form-data"),String.valueOf(edit_login_name.getText()));
                 RequestBody requestBody2 = RequestBody.create(MediaType.parse("multipart/form-data"),String.valueOf(edit_login_password.getText()));
@@ -96,7 +98,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 });
                // Intent intent=new Intent(this,HomeActivity.class);
                // startActivity(intent);
-
+                }
                 break;
             case R.id.tv_register_register:
                 Intent intent1=new Intent(this,ResisterActivity.class);

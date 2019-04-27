@@ -127,9 +127,8 @@ public class PasswordForgetActivity extends AppCompatActivity implements View.On
                             Toast.makeText(PasswordForgetActivity.this, "亲亲，两次密码必须一致哦！", Toast.LENGTH_SHORT).show();
                         }
                     }
-                    break;
-
                 }
+                break;
             case R.id.btn_toolbar_delete_back:
                 finish();
                 break;

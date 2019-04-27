@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -74,6 +75,9 @@ public class BookManageActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.search_book_favorite_search:
+                //关闭输入法
+                InputMethodManager m=(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                m.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
                 if(search_book_favorite.getText().toString().equals("")){
                     mListBook.clear();
                     getbook();
@@ -95,22 +99,25 @@ public class BookManageActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void onResponse(Call<List<getBook>> call, Response<List<getBook>> response) {
                 // Toast.makeText(getContext(),"我来了 "+response.body(),Toast.LENGTH_SHORT).show();
-                for(int i=0;i<response.body().size();i++){
-                    getBook getbook=new getBook(response.body().get(i).getTitle(),
-                            response.body().get(i).getAuthor(),
-                            response.body().get(i).getPublisher(),
-                            response.body().get(i).getIsbn(),
-                            response.body().get(i).getSummary(),
-                            response.body().get(i).getSimage(),
-                            response.body().get(i).getMimage(),
-                            response.body().get(i).getLimage());
-                    mListBook.add(getbook);
+                if (response.body().size() == 0) {
+                    Toast.makeText(BookManageActivity.this, "您目前还没有收藏书籍哦！", Toast.LENGTH_SHORT).show();
+                } else {
+                    for (int i = 0; i < response.body().size(); i++) {
+                        getBook getbook = new getBook(response.body().get(i).getTitle(),
+                                response.body().get(i).getAuthor(),
+                                response.body().get(i).getPublisher(),
+                                response.body().get(i).getIsbn(),
+                                response.body().get(i).getSummary(),
+                                response.body().get(i).getSimage(),
+                                response.body().get(i).getMimage(),
+                                response.body().get(i).getLimage());
+                        mListBook.add(getbook);
+                    }
+                    //GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2);//2列
+                    adapter = new BookManageAdapter(mListBook);
+                    recyclerView.setAdapter(adapter);
                 }
-                //GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2);//2列
-                adapter = new BookManageAdapter(mListBook);
-                recyclerView.setAdapter(adapter);
             }
-
             @Override
             public void onFailure(Call<List<getBook>> call, Throwable t) {
                 Log.i("书籍列表：",t.getMessage());
@@ -121,36 +128,36 @@ public class BookManageActivity extends AppCompatActivity implements View.OnClic
 
 
     private void searchBook(){
-        Call<List<getBook>> getbook = RestrofitTool.getmApi().getBookSearch(ShareUtils.getString(this,"token",null),
-                ShareUtils.getString(this,"username","lxy"),search_book_favorite.getText().toString());
-        getbook.enqueue(new Callback<List<getBook>>() {
-            @Override
-            public void onResponse(Call<List<getBook>> call, Response<List<getBook>> response) {
-                // Toast.makeText(getContext(),"我来了 "+response.body(),Toast.LENGTH_SHORT).show();
-                for(int i=0;i<response.body().size();i++){
-                    getBook getbook=new getBook(response.body().get(i).getTitle(),
-                            response.body().get(i).getAuthor(),
-                            response.body().get(i).getPublisher(),
-                            response.body().get(i).getIsbn(),
-                            response.body().get(i).getSummary(),
-                            response.body().get(i).getSimage(),
-                            response.body().get(i).getMimage(),
-                            response.body().get(i).getLimage());
-                    mListBook.add(getbook);
+            Call<List<getBook>> getbook = RestrofitTool.getmApi().getBookSearch(ShareUtils.getString(this,"token",null),
+                    ShareUtils.getString(this,"username","lxy"),search_book_favorite.getText().toString());
+            getbook.enqueue(new Callback<List<getBook>>() {
+                @Override
+                public void onResponse(Call<List<getBook>> call, Response<List<getBook>> response) {
+                    // Toast.makeText(getContext(),"我来了 "+response.body(),Toast.LENGTH_SHORT).show();
+                    for(int i=0;i<response.body().size();i++){
+                        getBook getbook=new getBook(response.body().get(i).getTitle(),
+                                response.body().get(i).getAuthor(),
+                                response.body().get(i).getPublisher(),
+                                response.body().get(i).getIsbn(),
+                                response.body().get(i).getSummary(),
+                                response.body().get(i).getSimage(),
+                                response.body().get(i).getMimage(),
+                                response.body().get(i).getLimage());
+                        mListBook.add(getbook);
+                    }
+
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(BookManageActivity.this);
+                    //GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2);//2列
+                    recyclerView.setLayoutManager(layoutManager);
+                    BookManageAdapter adapter = new BookManageAdapter(mListBook);
+                    recyclerView.setAdapter(adapter);
                 }
 
-                LinearLayoutManager layoutManager = new LinearLayoutManager(BookManageActivity.this);
-                //GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2);//2列
-                recyclerView.setLayoutManager(layoutManager);
-                BookManageAdapter adapter = new BookManageAdapter(mListBook);
-                recyclerView.setAdapter(adapter);
-            }
-
-            @Override
-            public void onFailure(Call<List<getBook>> call, Throwable t) {
-                Log.i("书籍列表：",t.getMessage());
-                Toast.makeText(BookManageActivity.this,"没有获取到书籍信息",Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onFailure(Call<List<getBook>> call, Throwable t) {
+                    Log.i("书籍列表：",t.getMessage());
+                    Toast.makeText(BookManageActivity.this,"没有获取到书籍信息",Toast.LENGTH_SHORT).show();
+                }
+            });
     }
 }

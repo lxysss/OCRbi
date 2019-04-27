@@ -10,6 +10,7 @@ import android.view.KeyEvent;
 import android.widget.Toast;
 
 import com.example.lxysss.ocrbi.R;
+import com.example.lxysss.ocrbi.activity.BookDetailActivity;
 import com.google.zxing.ResultPoint;
 import com.journeyapps.barcodescanner.BarcodeCallback;
 import com.journeyapps.barcodescanner.BarcodeResult;
@@ -71,7 +72,6 @@ public class ScanQRCodeActivity extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         return bv_barcode.onKeyDown(keyCode, event) || super.onKeyDown(keyCode, event);
     }
-
 
 
 }

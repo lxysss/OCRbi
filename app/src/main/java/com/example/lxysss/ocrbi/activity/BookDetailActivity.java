@@ -105,7 +105,7 @@ public class BookDetailActivity extends AppCompatActivity implements View.OnClic
 
                         @Override
                         public void onFailure(Call<Bean2> call, Throwable t) {
-
+                            Toast.makeText(BookDetailActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
                         }
                     });
                     book_love.setImageResource(R.drawable.book_love_you);
@@ -132,7 +132,7 @@ public class BookDetailActivity extends AppCompatActivity implements View.OnClic
 
                         @Override
                         public void onFailure(Call<Bean2> call, Throwable t) {
-
+                            Toast.makeText(BookDetailActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
                         }
                     });
                     book_love.setImageResource(R.drawable.love);
