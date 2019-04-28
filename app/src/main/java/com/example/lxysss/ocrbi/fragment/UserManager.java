@@ -317,14 +317,14 @@ private ImageView get_image;
         switch (requestCode){
             case TAKE_PHOTO:
                 if(resultCode == RESULT_OK) {
-                    Toast.makeText(getActivity(),"我进来了",Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(getActivity(),"我进来了",Toast.LENGTH_SHORT).show();
                   /*  try{
                         Bitmap bitmap=BitmapFactory.decodeStream(getActivity().getContentResolver().openInputStream(imageUri));
                         profile_image.setImageBitmap(bitmap);
                     }catch (FileNotFoundException e){
                         e.printStackTrace();
                     }*/
-                    Toast.makeText(getActivity(),"imageUri"+imageUri.toString(),Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getActivity(),"imageUri"+imageUri.toString(),Toast.LENGTH_SHORT).show();
                     startCrop(imageUri);//照相完毕裁剪处理
                 }
                 break;
@@ -365,12 +365,12 @@ private ImageView get_image;
                 IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
                 if (result != null) {
                     if (result.getContents() == null) {
-                        Log.d(getClass().getName(), "Cancelled");
+                        //Log.d(getClass().getName(), "Cancelled");
                         Toast.makeText(getContext(), "扫描结果为空", Toast.LENGTH_LONG).show();
                     } else {
-                        Log.d(getClass().getName(), "Scanned: " + result.getContents());
+                       // Log.d(getClass().getName(), "Scanned: " + result.getContents());
                         IsbnToBook(result.getContents());
-                        Toast.makeText(getContext(), result.getContents(), Toast.LENGTH_LONG).show();
+                       // Toast.makeText(getContext(), result.getContents(), Toast.LENGTH_LONG).show();
                     }
                 }
                 break;
@@ -386,7 +386,7 @@ private ImageView get_image;
          @Override
          public void onResponse(Call<IsbnBook> call, Response<IsbnBook> response) {
              Intent intent=new Intent(getContext(),BookDetailActivity.class);
-             Toast.makeText(getContext(),response.body().toString(),Toast.LENGTH_LONG).show();
+            // Toast.makeText(getContext(),response.body().toString(),Toast.LENGTH_LONG).show();
              Log.e("书籍扫描：",response.body().toString());
              intent.putExtra("book_title",response.body().getTitle());
              intent.putExtra("book_pic",response.body().getSimage());

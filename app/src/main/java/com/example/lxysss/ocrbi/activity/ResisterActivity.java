@@ -57,13 +57,13 @@ public class ResisterActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.button_register_register:
                 ApiService mapi= RestrofitTool.getmApi();
-                RequestBody username= RequestBody.create(MediaType.parse("multipart/form-data"),edit_register_username.getText().toString());
-                RequestBody password= RequestBody.create(MediaType.parse("multipart/form-data"),edit_register_password.getText().toString());
-                RequestBody phonenumber= RequestBody.create(MediaType.parse("multipart/form-data"),edit_register_phonenumber.getText().toString());
-                RequestBody phonenumberyz= RequestBody.create(MediaType.parse("multipart/form-data"),edit_register_phonenumber_yz.getText().toString());
-                RequestBody email= RequestBody.create(MediaType.parse("multipart/form-data"),"null");
-                RequestBody sex= RequestBody.create(MediaType.parse("multipart/form-data"),"2");
-                RequestBody age= RequestBody.create(MediaType.parse("multipart/form-data"),"0");
+             final   RequestBody username= RequestBody.create(MediaType.parse("multipart/form-data"),edit_register_username.getText().toString());
+                final RequestBody password= RequestBody.create(MediaType.parse("multipart/form-data"),edit_register_password.getText().toString());
+                final RequestBody phonenumber= RequestBody.create(MediaType.parse("multipart/form-data"),edit_register_phonenumber.getText().toString());
+                 RequestBody phonenumberyz= RequestBody.create(MediaType.parse("multipart/form-data"),edit_register_phonenumber_yz.getText().toString());
+                final  RequestBody email= RequestBody.create(MediaType.parse("multipart/form-data")," ");
+                final RequestBody sex= RequestBody.create(MediaType.parse("multipart/form-data"),"2");
+                final RequestBody age= RequestBody.create(MediaType.parse("multipart/form-data"),"0");
                 if(edit_register_username.getText().toString().equals("")&& edit_register_password.getText().toString().equals("")
                         && edit_register_phonenumber.getText().toString().equals("") && edit_register_phonenumber_yz.getText().toString().equals("")) {
                     Toast.makeText(ResisterActivity.this, "输入不能为空！", Toast.LENGTH_SHORT).show();
@@ -77,7 +77,30 @@ public class ResisterActivity extends AppCompatActivity implements View.OnClickL
                         @Override
                         public void onResponse(Call<Bean2> call, Response<Bean2> response) {
                             if (response.body().getCode() == 1000) {
-                                flag = 1;
+                                Call<Useriofm> register = RestrofitTool.getmApi().register(username, password, phonenumber, email, sex, age);
+                                //发送网络请求(异步)
+                                register.enqueue(new Callback<Useriofm>() {
+                                    //请求成功时回调
+                                    @Override
+                                    public void onResponse(Call<Useriofm> call, Response<Useriofm> response) {
+                                        //请求处理,输出结果-response.body().show();
+                                        if (response.body().code == 1001) {
+                                            //   Toast.makeText(ResisterActivity.this, response.body().code+response.body().msg+"", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(ResisterActivity.this, "注册成功！", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(ResisterActivity.this, "稍后请在用户个人中心完善信息哦！", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            //  Toast.makeText(ResisterActivity.this, response.body().code+response.body().msg, Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(ResisterActivity.this, "注册失败！", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<Useriofm> call, Throwable t) {
+                                        Toast.makeText(ResisterActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
+                                        //请求失败时候的回调
+                                    }
+                                });
+                                finish();
                             } else if (response.body().getCode() == 2000) {
                                 Toast.makeText(ResisterActivity.this, response.body().getMsg(), Toast.LENGTH_SHORT).show();
                             }
@@ -88,32 +111,6 @@ public class ResisterActivity extends AppCompatActivity implements View.OnClickL
 
                         }
                     });
-                    if (flag == 1) {
-                        Call<Useriofm> register = mapi.register(username, password, phonenumber, email, sex, age);
-                        //发送网络请求(异步)
-                        register.enqueue(new Callback<Useriofm>() {
-                            //请求成功时回调
-                            @Override
-                            public void onResponse(Call<Useriofm> call, Response<Useriofm> response) {
-                                //请求处理,输出结果-response.body().show();
-                                if (response.body().code == 1001) {
-                                    //   Toast.makeText(ResisterActivity.this, response.body().code+response.body().msg+"", Toast.LENGTH_SHORT).show();
-                                    Toast.makeText(ResisterActivity.this, "注册成功！", Toast.LENGTH_SHORT).show();
-                                    Toast.makeText(ResisterActivity.this, "稍后请在用户个人中心完善信息哦！", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    //  Toast.makeText(ResisterActivity.this, response.body().code+response.body().msg, Toast.LENGTH_SHORT).show();
-                                    Toast.makeText(ResisterActivity.this, "注册失败！", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<Useriofm> call, Throwable t) {
-                                Toast.makeText(ResisterActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
-                                //请求失败时候的回调
-                            }
-                        });
-                        finish();
-                    }
                 }
                 break;
             case R.id.edit_register_phonenumber_yz_hq:
@@ -125,7 +122,7 @@ public class ResisterActivity extends AppCompatActivity implements View.OnClickL
                     getphoneyz.enqueue(new Callback<Bean2>() {
                         @Override
                         public void onResponse(Call<Bean2> call, Response<Bean2> response) {
-                            if (response.body().getCode() == 1000) {
+                            if (response.body().getCode() == 1001) {
                                 Toast.makeText(ResisterActivity.this, response.body().getMsg(), Toast.LENGTH_SHORT).show();
                             } else if (response.body().getCode() == 2000) {
                                 Toast.makeText(ResisterActivity.this, response.body().getMsg(), Toast.LENGTH_SHORT).show();

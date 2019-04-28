@@ -71,10 +71,9 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     private SurfaceHolder mHolder;
     private Camera mCamera;
     private int Camerawidth,Cameraheight;
-    private boolean flag=true,isPic=false,isPoint=false;
+    private boolean flag=true,isPic=false;
     private long startTime,endTime;
     private Context mcontext;
-    private  Bitmap bitmap;
     //
     private RenderScript rs;
     private ScriptIntrinsicYuvToRGB yuvToRgbIntrinsic;
@@ -85,6 +84,8 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     private TextView dialog_word,dialog_pinyin,dialog_yisi1,dialog_yisi2,dialog_yisi3;
     //TTS
     private SpeechSynthesizer mTts;
+
+
     public CameraPreview(Context context) {
         super(context);
         mcontext=context;
@@ -108,7 +109,6 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         mTts.setParameter(SpeechConstant.SPEED, "50");//设置语速
         mTts.setParameter(SpeechConstant.VOLUME, "80");//设置音量，范围0~100
         mTts.setParameter(SpeechConstant.ENGINE_TYPE, SpeechConstant.TYPE_CLOUD); //设置云端
-
 
         mHolder = getHolder();
         mHolder.addCallback(this);
@@ -225,26 +225,21 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public void onPreviewFrame(byte[] data, Camera camera) {
+       Bitmap bitmap;
         if(flag) {
             flag=false;
-       /* try {
-            String res = new String(data,"UTF-8");
-            Log.e("data:",res);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }*/
-            //  Toast.makeText(mcontext,String.valueOf(data),Toast.LENGTH_LONG).show();
-            endTime = System.currentTimeMillis(); //结束时间
+            endTime = System.currentTimeMillis();
             if (!isPic) {
                 if (endTime - startTime > 2000) {
                     bitmap = SpeedDataToBmp(data);
-                    bmptowen(rotaingImageView(90, bitmap));
-
+                   // bmptowen(rotaingImageView(270, bitmap));
+                    bmptowen(rotaingImageView(90,mirrorConvert(bitmap,0)));
                     isPic = true;
                 }
             }
-            if (isPic && !isPoint) {
+            else {
                 Log.i(TAG, "processing frame");
+
                 bitmap = SpeedDataToBmp(data);
                 getBmpRed(bitmap);
             }
@@ -283,39 +278,13 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
     private void openCameraOriginal() {
         try {
-            mCamera = Camera.open();
-           // mCamera = Camera.open(1);  调用前置摄像头
+           // mCamera = Camera.open();
+            mCamera = Camera.open(1);  //调用前置摄像头
         } catch (Exception e) {
             Log.d(TAG, "camera is not available");
         }
     }
 
-
-   /* public Bitmap onDataToBmp(byte[] data){
-
-        ByteArrayOutputStream baos;
-        byte[] rawImage;
-        Bitmap bitmap;
-      //  mCamera.setOneShotPreviewCallback(null);
-        //处理data
-        //Camera.Size previewSize = mCamera.getParameters().getPreviewSize();//获取尺寸,格式转换的时候要用到
-        BitmapFactory.Options newOpts = new BitmapFactory.Options();
-        newOpts.inJustDecodeBounds = true;
-        YuvImage yuvimage = new YuvImage(
-                data,
-                ImageFormat.NV21,
-                Camerawidth,
-                Cameraheight,
-                null);
-        baos = new ByteArrayOutputStream();
-        yuvimage.compressToJpeg(new Rect(0, 0, Camerawidth, Cameraheight), 100, baos);// 80--JPG图片的质量[0-100],100最高
-        rawImage = baos.toByteArray();
-        //将rawImage转换成bitmap
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inPreferredConfig = Bitmap.Config.RGB_565;
-        bitmap = BitmapFactory.decodeByteArray(rawImage, 0, rawImage.length, options);
-        return bitmap;
-    }*/
 
     public Bitmap SpeedDataToBmp(byte[] data){
         if (yuvType == null)
@@ -341,51 +310,55 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
      public void getBmpRed(Bitmap bitmap1){
         int i,j,r,g,b,flag=0,color;
         Bitmap bitmap;
-        bitmap= rotaingImageView(90,bitmap1);
-         Log.i(TAG," "+bitmap.getWidth()+" "+bitmap.getHeight());
+        bitmap= rotaingImageView(90,mirrorConvert(bitmap1,0));
+        // Log.i(TAG," "+bitmap.getWidth()+" "+bitmap.getHeight());
         for( i=0;i<bitmap.getWidth();i++){
             for( j=0;j<bitmap.getHeight();j++){
                  color = bitmap.getPixel(i,j);
-               //   Log.i(TAG,color+" ");
                  r = Color.red(color);
                  g = Color.green(color);
                  b = Color.blue(color);
-               //  Log.i("RGB",r+" "+g+" "+b);
-                if((140<=r && r<=255) && (0<=g && g<=100) && (0<=b && b<=100)){
-                   // Toast.makeText(getContext(),"找到红色了！",Toast.LENGTH_SHORT).show();
-                  //  bmptowen(bitmap);
+                if((160<=r && r<=255) && (0<=g && g<=100) && (0<=b && b<=100)){
                     Log.i(TAG,"找到红色了"+r+"　"+g+"　"+b);
-                    //(bitmap.getWidth()-j,i)
-                    Log.i("位置：",i+"　，"+j);
+                    Log.i("位置：",i+"　,"+j);
                     Call<Word> wordCall= RestrofitTool.getmApi().getwordMsgPhoto(i,j,
                             ShareUtils.getString(getContext(),"username","lxy"));
                     wordCall.enqueue(new Callback<Word>() {
                         @Override
                         public void onResponse(Call<Word> call, Response<Word> response) {
                             if(response.body().getCode()==1001) {
-                                dialog.show();
-                                dialog_word.setText(response.body().getWord());
-                                dialog_pinyin.setText(response.body().getPinyin());
-                                dialog_yisi1.setText(response.body().getYisi1());
-                                dialog_yisi2.setText(response.body().getYisi2());
-                                dialog_yisi3.setText(response.body().getYisi3());
-                                startSpeak("汉字" + response.body().getWord());
-                                Handler handler = new Handler();
-                                handler.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-
-                                        dialog.dismiss();
-                                    }
-                                }, 3000);
+                                if(response.body().getWord()!=null) {
+                                    dialog.show();
+                                    Log.e(TAG,response.body().getWord());
+                                    dialog_word.setText(response.body().getWord());
+                                    dialog_pinyin.setText(response.body().getPinyin());
+                                    dialog_yisi1.setText(response.body().getYisi1());
+                                    dialog_yisi2.setText(response.body().getYisi2());
+                                    dialog_yisi3.setText(response.body().getYisi3());
+                                    startSpeak("汉字" + response.body().getWord());
+                                    TimerTask task = new TimerTask() {
+                                        @Override
+                                        public void run() {
+                                            /**
+                                             *要执行的操作
+                                             */
+                                            dialog.dismiss();
+                                        }
+                                    };
+                                    Timer timer = new Timer();
+                                    timer.schedule(task, 3000);//3秒后执行TimeTask的run方法
+                                }else{
+                                  //  Toast.makeText(mcontext,"返回的汉字为空！",Toast.LENGTH_LONG).show();
+                                    Log.e(TAG,"返回的汉字为空!");
+                                }
                             }else {
-                                Toast.makeText(mcontext,"没有找到汉字！",Toast.LENGTH_LONG).show();
+                               // Toast.makeText(mcontext,"没有找到汉字！",Toast.LENGTH_LONG).show();
                                 Log.e(TAG,"没有找到汉字!");
                             }
                         }
                         @Override
                         public void onFailure(Call<Word> call, Throwable t) {
-
+                            Log.e(TAG,"服务器请求不到!");
                         }
                     });
                     flag=1;
@@ -435,11 +408,11 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         putimg.enqueue(new Callback<Img>() {
             @Override
             public void onResponse(Call<Img> call, Response<Img> response) {
-                if(response.body().getMsg().equals("success")){
-                    Toast.makeText(mcontext,"上传文件成功！",Toast.LENGTH_LONG).show();
+              //  if(response.body().getMsg().equals("success")){
+                   // Toast.makeText(mcontext,"上传文件成功！",Toast.LENGTH_LONG).show();
                     //Toast.makeText(mcontext,response.body().getLen(),Toast.LENGTH_LONG).show();
                     //Toast.makeText(mcontext,response.body().getPrint(),Toast.LENGTH_LONG).show();
-                }
+              //  }
             }
 
             @Override
@@ -449,7 +422,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         });
 
     }
-    //旋转摄像头
+    //旋转图像
     public static Bitmap rotaingImageView(int angle , Bitmap bitmap) {
         //前置摄像头270度，后置摄像头90度
         //旋转图片 动作
@@ -460,6 +433,16 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0,
                 bitmap.getWidth(), bitmap.getHeight(), matrix, true);
         return resizedBitmap;
+    }
+    //图像镜像
+    public Bitmap mirrorConvert(Bitmap srcBitmap,int flag) {
+        //flag: 0 左右翻转，1 上下翻转
+        Matrix matrix = new Matrix();
+        if (flag == 0) //左右翻转
+            matrix.setScale(-1, 1);
+        if (flag == 1)//上下翻转
+            matrix.setScale(1, -1);
+        return Bitmap.createBitmap(srcBitmap, 0, 0, srcBitmap.getWidth(), srcBitmap.getHeight(), matrix, true);
     }
 
     //开始说话

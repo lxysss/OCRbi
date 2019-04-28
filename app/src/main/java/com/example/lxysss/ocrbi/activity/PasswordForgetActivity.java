@@ -76,8 +76,8 @@ public class PasswordForgetActivity extends AppCompatActivity implements View.On
                 break;
             case R.id.comfire_forget_pass:
                 RequestBody code = RequestBody.create(MediaType.parse("multipart/form-data"), forget_pass_code.getText().toString());
-                RequestBody phone = RequestBody.create(MediaType.parse("multipart/form-data"), forget_pass_phone.getText().toString());
-                RequestBody pass = RequestBody.create(MediaType.parse("multipart/form-data"), forget_pass_new.getText().toString());
+             final   RequestBody phone = RequestBody.create(MediaType.parse("multipart/form-data"), forget_pass_phone.getText().toString());
+              final  RequestBody pass = RequestBody.create(MediaType.parse("multipart/form-data"), forget_pass_new.getText().toString());
                 RequestBody passnew = RequestBody.create(MediaType.parse("multipart/form-data"), forget_pass_new_2.getText().toString());
                 if (forget_pass_phone.getText().toString().equals("") && forget_pass_code.getText().toString().equals("")) {
                     Toast.makeText(PasswordForgetActivity.this, "手机号和验证码不可为空！", Toast.LENGTH_SHORT).show();
@@ -87,7 +87,32 @@ public class PasswordForgetActivity extends AppCompatActivity implements View.On
                         @Override
                         public void onResponse(Call<Bean2> call, Response<Bean2> response) {
                             if (response.body().getCode() == 1001) {
-                                flag = 1;
+
+                                if (forget_pass_new.getText().toString().equals("") || forget_pass_new_2.getText().toString().equals("")) {
+                                    Toast.makeText(PasswordForgetActivity.this, "密码不可为空！", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    if (forget_pass_new.getText().toString().equals(forget_pass_new_2.getText().toString())) {
+                                        Call<Bean2> xiugaipass=RestrofitTool.getmApi().passchange(phone,pass);
+                                        xiugaipass.enqueue(new Callback<Bean2>() {
+                                            @Override
+                                            public void onResponse(Call<Bean2> call, Response<Bean2> response) {
+                                                if (response.body().getCode() == 1001) {
+                                                    Toast.makeText(PasswordForgetActivity.this, response.body().getMsg(), Toast.LENGTH_SHORT).show();
+                                                    finish();
+                                                } else if (response.body().getCode() == 2000) {
+                                                    Toast.makeText(PasswordForgetActivity.this, response.body().getMsg(), Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<Bean2> call, Throwable t) {
+
+                                            }
+                                        });
+                                    } else {
+                                        Toast.makeText(PasswordForgetActivity.this, "亲亲，两次密码必须一致哦！", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
                             } else if (response.body().getCode() == 2000) {
                                 Toast.makeText(PasswordForgetActivity.this, response.body().getMsg(), Toast.LENGTH_SHORT).show();
                             } else if (response.body().getCode() == 2001) {
@@ -101,33 +126,7 @@ public class PasswordForgetActivity extends AppCompatActivity implements View.On
                         }
                     });
                 }
-                if (flag == 1) {
-                    if (forget_pass_new.getText().toString().equals("") || forget_pass_new_2.getText().toString().equals("")) {
-                        Toast.makeText(PasswordForgetActivity.this, "密码不可为空！", Toast.LENGTH_SHORT).show();
-                    } else {
-                        if (forget_pass_new.getText().toString().equals(forget_pass_new_2.getText().toString())) {
-                            Call<Bean2> xiugaipass=RestrofitTool.getmApi().passchange(phone,pass);
-                            xiugaipass.enqueue(new Callback<Bean2>() {
-                                @Override
-                                public void onResponse(Call<Bean2> call, Response<Bean2> response) {
-                                    if (response.body().getCode() == 1001) {
-                                        Toast.makeText(PasswordForgetActivity.this, response.body().getMsg(), Toast.LENGTH_SHORT).show();
-                                        finish();
-                                    } else if (response.body().getCode() == 2000) {
-                                        Toast.makeText(PasswordForgetActivity.this, response.body().getMsg(), Toast.LENGTH_SHORT).show();
-                                    }
-                                }
 
-                                @Override
-                                public void onFailure(Call<Bean2> call, Throwable t) {
-
-                                }
-                            });
-                        } else {
-                            Toast.makeText(PasswordForgetActivity.this, "亲亲，两次密码必须一致哦！", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
                 break;
             case R.id.btn_toolbar_delete_back:
                 finish();
