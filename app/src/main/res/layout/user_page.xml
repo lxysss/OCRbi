@@ -33,17 +33,21 @@
     <TextView
         android:id="@+id/user_name"
         android:layout_marginLeft="30dp"
-        android:textSize="30sp"
+        android:textSize="26sp"
         android:layout_marginTop="10dp"
         android:textColor="#000"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="lxy"/>
 
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
     <ImageView
         android:layout_width="120dp"
         android:layout_gravity="bottom"
-        android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp"
         android:layout_height="80dp"
         android:src="@drawable/wugui"/>
 </LinearLayout>

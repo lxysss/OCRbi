@@ -318,7 +318,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
                  r = Color.red(color);
                  g = Color.green(color);
                  b = Color.blue(color);
-                if((160<=r && r<=255) && (0<=g && g<=100) && (0<=b && b<=100)){
+                if((150<=r && r<=255) && (0<=g && g<=100) && (0<=b && b<=100)){
                     Log.i(TAG,"找到红色了"+r+"　"+g+"　"+b);
                     Log.i("位置：",i+"　,"+j);
                     Call<Word> wordCall= RestrofitTool.getmApi().getwordMsgPhoto(i,j,
@@ -426,7 +426,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     public static Bitmap rotaingImageView(int angle , Bitmap bitmap) {
         //前置摄像头270度，后置摄像头90度
         //旋转图片 动作
-        Matrix matrix = new Matrix();;
+        Matrix matrix = new Matrix();
         matrix.postRotate(angle);
         System.out.println("angle2=" + angle);
         // 创建新的图片
